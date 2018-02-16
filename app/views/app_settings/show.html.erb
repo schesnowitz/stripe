@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>App name:</strong>
+  <%= @app_setting.app_name %>
+</p>
+
+<p>
+  <strong>Tab name:</strong>
+  <%= @app_setting.tab_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @app_setting.email %>
+</p>
+
+<p>
+  <strong>Street:</strong>
+  <%= @app_setting.street %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @app_setting.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @app_setting.state %>
+</p>
+
+<p>
+  <strong>Postal code:</strong>
+  <%= @app_setting.postal_code %>
+</p>
+
+<%= link_to 'Edit', edit_app_setting_path(@app_setting) %> |
+<%= link_to 'Back', app_settings_path %>

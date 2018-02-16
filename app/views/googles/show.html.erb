@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @google.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @google.body %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @google.source %>
+</p>
+
+<p>
+  <strong>Title url:</strong>
+  <%= @google.title_url %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @google.image_url %>
+</p>
+
+<%= link_to 'Edit', edit_google_path(@google) %> |
+<%= link_to 'Back', googles_path %>

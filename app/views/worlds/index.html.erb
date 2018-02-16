@@ -1,0 +1,39 @@
+<%= paginate @worlds %>
+<br><br>
+<%= form_tag(worlds_path, method: :get, :class => 'form-inline') do %>
+<div class="toolbar">
+  <div class="actions">
+    <i class="actions__item zmdi zmdi-search" data-sa-action="toolbar-search-open"></i>
+  </div>
+  <%= text_field_tag :term, params[:term], class: 'form-control' %>
+  <%= submit_tag 'Search', class: 'btn btn-danger' %>
+  <%= link_to "Clear Search", worlds_path, class: 'btn btn-info' %>
+  <div class="toolbar__search" style="display: none;">
+    <i class="toolbar__search__close zmdi zmdi-long-arrow-left" data-sa-action="toolbar-search-close"></i>
+  </div>
+</div>
+<% end %>
+<div class='row'>
+  <% @worlds.each do |world| %>
+  <div class='col-sm-3'>
+    <div class="card mb-3">
+      <%= link_to world.title_url, target: :_blank do %>
+      <h3 class="card-header"><%= truncate(world.title, length: 60) %></h3>
+      <div class="card-body">
+        <h5 class="card-title"><%= (world.source) %></h5>
+      </div>
+      <% end %>
+      <%= image_tag (world.image_url if !world.image_url.nil? ) %>
+      <div class="card-footer text-muted">
+        Story Published <%= time_ago_in_words(world.created_at) %> ago
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<br>
+
+<%= link_to 'New World News', new_world_path %>
+
+
+

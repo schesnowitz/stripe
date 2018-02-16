@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
 
+  resources :app_settings
+  resources :entertainments
+  resources :worlds
+  resources :tecs
+  resources :googles
   devise_for :users
   root to: "pages#index"
-  resources :subscriptions, only: [:new, :create]
+  resource :subscription
+  resources :subscriptions, only: [:new, :create, :destroy]
 
+  require 'sidekiq/web'
+  require 'sidekiq/cron/web'
+  mount Sidekiq::Web => '/sidekiq'
 end
+
+

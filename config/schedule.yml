@@ -1,0 +1,14 @@
+create_tec_news_job:
+  cron: "* * * * *"
+  class: "CreateTecNewsJob"   
+  queue: default 
+
+create_world_news_job:
+  cron: "* * * * *"
+  class: "CreateWorldNewsJob"   
+  queue: default 
+
+create_entertainment_news_job:
+  cron: "* * * * *"
+  class: "CreateEntertainmentNewsJob"   
+  queue: default   

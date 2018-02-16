@@ -2,55 +2,45 @@ run.config:
   engine: ruby
   engine.config:
     runtime: ruby-2.4
-  # add extra packages
   extra_packages:
     - nodejs
     - nginx
-    - ImageMagick
+    - pkgconf
+    - libxml2
+    - libxslt
 
-  build_triggers:
-    - Gemfile
-    - Gemfile.lock
-
-#
 deploy.config:
   extra_steps:
-    - rake assets:precompile
-
+    - rake assets:precompile RAILS_ENV=production
   before_live:
     web.main:
       - rake db:setup_or_migrate
-
-# add a database
+      # - rake db:seedgit
 data.db:
-  image: nanobox/postgresql
+  image: nanobox/postgresql:9.5
 
-# add a web component and give it a "start" command
 web.main:
   start:
     nginx: nginx -c /app/config/nginx.conf
-    puma: bundle exec puma -C /app/config/puma.rb 
+    puma: bundle exec puma -C /app/config/puma.rb
+  writable_dirs:
+    - tmp
+    - db
 
-  # add writable dirs to the web component
+
+  log_watch:
+    rails: 'log/production.log'
+
+worker.sidekiq:
+  start: sidekiq
+  # start: bundle exec sidekiq -q default -q mailers -C /app/config/sidekiq.rb
+  # Sidekiq.redis { |conn| conn.flushdb } 
+  log_watch:
+    sidekiq: 'log/production.log'
+
   writable_dirs:
     - tmp
     - log
-    - public/uploads
 
-  # the path to a logfile you want streamed to the nanobox dashboard
-  log_watch:
-    rails: 'log/production.log'
-    # sidekiq: 'sidekiq.log'
-
-
-# add a worker component and give it a "start" command
-worker.main:
-  start: bundle exec sidekiq -q default -q mailers -C /app/config/sidekiq.rb   # 
-#           # Sidekiq.redis { |flush| flush.flushdb }     run in console
-# data.redis:
-#   image: nanobox/redis:3.0
-
-#   # optional redis configs
-#   config:
-#     tcp_keepalive: 60
-#     databases: 16
+data.queue:
+  image: nanobox/redis:4.0

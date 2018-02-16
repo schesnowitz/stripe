@@ -1,0 +1,39 @@
+<%= paginate @entertainments %>
+<br><br>
+<%= form_tag(entertainments_path, method: :get, :class => 'form-inline') do %>
+<div class="toolbar">
+  <div class="actions">
+    <i class="actions__item zmdi zmdi-search" data-sa-action="toolbar-search-open"></i>
+  </div>
+  <%= text_field_tag :term, params[:term], class: 'form-control' %>
+  <%= submit_tag 'Search', class: 'btn btn-danger' %>
+  <%= link_to "Clear Search", entertainments_path, class: 'btn btn-info' %>
+  <div class="toolbar__search" style="display: none;">
+    <i class="toolbar__search__close zmdi zmdi-long-arrow-left" data-sa-action="toolbar-search-close"></i>
+  </div>
+</div>
+<% end %>
+<div class='row'>
+  <% @entertainments.each do |entertainment| %>
+  <div class='col-sm-3'>
+    <div class="card mb-3">
+      <%= link_to entertainment.title_url, target: :_blank do %>
+      <h3 class="card-header"><%= truncate(entertainment.title, length: 60) %></h3>
+      <div class="card-body">
+        <h5 class="card-title"><%= (entertainment.source) %></h5>
+      </div>
+      <% end %>
+      <%= image_tag (entertainment.image_url if !entertainment.image_url.nil? ) %>
+      <div class="card-footer text-muted">
+        Story Published <%= time_ago_in_words(entertainment.created_at) %> ago
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<br>
+
+<%= link_to 'New Entertainment News', new_entertainment_path %>
+
+
+

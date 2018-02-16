@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @entertainment.title %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @entertainment.source %>
+</p>
+
+<p>
+  <strong>Title url:</strong>
+  <%= @entertainment.title_url %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @entertainment.image_url %>
+</p>
+
+<%= link_to 'Edit', edit_entertainment_path(@entertainment) %> |
+<%= link_to 'Back', entertainments_path %>

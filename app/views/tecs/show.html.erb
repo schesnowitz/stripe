@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @tec.title %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @tec.source %>
+</p>
+
+<p>
+  <strong>Title url:</strong>
+  <%= @tec.title_url %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @tec.image_url %>
+</p>
+
+<%= link_to 'Edit', edit_tec_path(@tec) %> |
+<%= link_to 'Back', tecs_path %>
