@@ -27,7 +27,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
@@ -91,13 +91,15 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     address:                  'smtp.gmail.com',
     port:                     587,
     authentication:           :plain,  
-    user_name:                Rails.application.credentials.MAIL_USERNAME, 
-    password:                 Rails.application.credentials.MAIL_PASSWORD,  
+    user_name:                Rails.application.credentials.mail_username, 
+    password:                 Rails.application.credentials.mail_password,   
     domain:                   'google.com',  
     enable_starttls_auto:     true, 
   }

@@ -10,9 +10,17 @@ Rails.application.routes.draw do
   resource :subscription
   resources :subscriptions, only: [:new, :create, :destroy]
 
+
   require 'sidekiq/web'
   require 'sidekiq/cron/web'
-  mount Sidekiq::Web => '/sidekiq'
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  end
 end
 
 

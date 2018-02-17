@@ -21,6 +21,15 @@
       </li>
       <% end %>
 
+      <% if current_user.try(:admin?) %>
+        <li class="nav-item">
+          <%= link_to "Redis | Sidekiq", sidekiq_web_path, class: 'nav-link', target: '_blank' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Administration", rails_admin_path, class: 'nav-link', target: '_blank' %>
+        </li>
+      <% end %>
+
       <% if !current_user %>
       <li class="nav-item dropdown ml-auto">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
