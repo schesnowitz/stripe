@@ -1,6 +1,14 @@
+
+<div class="card border-dark mb-3" style="">
+<div class="card-header">
+<h2>Credit or debit card</h2>
+</div>
+<div class="card-body">
+<h4 class="card-title">
+
 <%= form_with url: subscriptions_path, method: :post, id: 'payment-form' do |form| %>
 
-    <label for="card-element">Credit or debit card</label>
+    <label for="card-element"></label>
     <div id="card-element"></div>
     <div id="card-errors" role="alert"></div>
 
@@ -8,3 +16,167 @@
 <% end %>
 
 
+</h4>
+<p class="card-text">
+
+
+</p>
+</div>
+</div>
+
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#cards">Test Cards</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#error">Testing responses/errors cards</a>
+  </li>
+
+
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade show active" id="cards">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Brand</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4242424242424242</td>
+        <td>Visa</td>
+      </tr>
+      <tr>
+        <td>4000056655665556</td>
+        <td>Visa (debit)</td>
+      </tr>
+      <tr>
+        <td>5555555555554444</td>
+        <td>Mastercard</td>
+      </tr>
+      <tr>
+        <td>2223003122003222</td>
+        <td>Mastercard (2-series)</td>
+      </tr>
+      <tr>
+        <td>5200828282828210</td>
+        <td>Mastercard (debit)</td>
+      </tr>
+      <tr>
+        <td>5105105105105100</td>
+        <td>Mastercard (prepaid)</td>
+      </tr>
+      <tr>
+        <td>378282246310005</td>
+        <td>American Express</td>
+      </tr>
+      <tr>
+        <td>371449635398431</td>
+        <td>American Express</td>
+      </tr>
+      <tr>
+        <td>6011111111111117</td>
+        <td>Discover</td>
+      </tr>
+      <tr>
+        <td>6011000990139424</td>
+        <td>Discover</td>
+      </tr>
+      <tr>
+        <td>30569309025904</td>
+        <td>Diners Club</td>
+      </tr>
+      <tr>
+        <td>38520000023237</td>
+        <td>Diners Club</td>
+      </tr>
+      <tr>
+        <td>3530111333300000</td>
+        <td>JCB</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tab-pane fade" id="error">
+   <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4000000000000077</td>
+        <td>Charge succeeds and funds will be added directly to your available balance (bypassing your pending balance).</td>
+      </tr>
+      <tr>
+        <td>4000000000000093</td>
+        <td>Charge succeeds and domestic pricing is used (other test cards use international pricing). This card is only significant in countries with split pricing.</td>
+      </tr>
+      <tr>
+        <td>4000000000000010</td>
+        <td>The address_line1_check and address_zip_check verifications fail. If your account is blocking payments that fail ZIP code validation, the charge is declined.</td>
+      </tr>
+      <tr>
+        <td>4000000000000028</td>
+        <td>Charge succeeds but the address_line1_check verification fails.</td>
+      </tr>
+      <tr>
+        <td>4000000000000036</td>
+        <td>	The address_zip_check verification fails. If your account is blocking payments that fail ZIP code validation, the charge is declined.</td>
+      </tr>
+      <tr>
+        <td>4000000000000044</td>
+        <td>Charge succeeds but the address_zip_check and address_line1_check verifications are both unavailable.</td>
+      </tr>
+      <tr>
+        <td>4000000000000101</td>
+        <td>	If a CVC number is provided, the cvc_check fails. If your account is blocking payments that fail CVC code validation, the charge is declined.</td>
+      </tr>
+      <tr>
+        <td>4000000000000341</td>
+        <td>Attaching this card to a Customer object succeeds, but attempts to charge the customer fail.</td>
+      </tr>
+      <tr>
+        <td>4000000000009235</td>
+        <td>Charge succeeds with a risk_level of elevated and placed into review.</td>
+      </tr>
+      <tr>
+        <td>4000000000000002</td>
+        <td>Charge is declined with a card_declined code.</td>
+      </tr>
+      <tr>
+        <td>4100000000000019</td>
+        <td>Results in a charge with a risk level of highest. The charge is blocked as it's considered fraudulent.</td>
+      </tr>
+      <tr>
+        <td>4000000000000127</td>
+        <td>Charge is declined with an incorrect_cvc code.</td>
+      </tr>
+      <tr>
+        <td>4000000000000069</td>
+        <td>Charge is declined with an expired_card code.</td>
+      </tr>
+      <tr>
+        <td>4000000000000119</td>
+        <td>Charge is declined with a processing_error code.</td>
+      </tr>
+      <tr>
+        <td>4242424242424241</td>
+        <td>Charge is declined with an incorrect_number code as the card number fails the Luhn check.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tab-pane fade" id="dropdown1">
+    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+  </div>
+  <div class="tab-pane fade" id="dropdown2">
+    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
+  </div>
+</div>

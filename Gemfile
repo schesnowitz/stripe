@@ -27,6 +27,7 @@ gem 'sidekiq-cron', '~> 0.6.3'
 gem 'httparty', '~> 0.15.6'
 gem 'bootstrap-sass-extras'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'font-awesome-sass', '~> 5.0.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

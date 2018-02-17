@@ -17,7 +17,13 @@ class ApplicationController < ActionController::Base
       the_fallback
     end
   end
-
+ 
+  def user_subscribed
+    if !current_user.stripe_subscription_id?
+      flash[:danger] = 'You need an active subscription!'
+      redirect_to(new_subscription_path)
+    end
+  end
 
   protected
 

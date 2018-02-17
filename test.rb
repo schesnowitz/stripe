@@ -1,6 +1,13 @@
-EDITOR=nano bin/rails secrets:edit
 
-
-EDITOR=vi bin/rails credentials:edit
-
-start: bundle exec sidekiq -q default -q mailers -C /app/config/sidekiq.rb  
+4000056655665556	Visa (debit)
+5555555555554444	Mastercard
+2223003122003222	Mastercard (2-series)
+5200828282828210	Mastercard (debit)
+5105105105105100	Mastercard (prepaid)
+378282246310005	American Express
+371449635398431	American Express
+6011111111111117	Discover
+6011000990139424	Discover
+30569309025904	Diners Club
+38520000023237	Diners Club
+3530111333300000	JCB

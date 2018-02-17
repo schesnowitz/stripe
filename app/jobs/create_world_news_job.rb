@@ -2,7 +2,7 @@ class CreateWorldNewsJob < ApplicationJob
  
   require 'open-uri'
   def perform(*args)
-  page = Nokogiri::HTML(open('https://news.google.com/news/headlines/section/topic/TECHNOLOGY'))
+  page = Nokogiri::HTML(open('https://news.google.com/news/headlines/section/topic/WORLD'))
 
 
     @title = page.xpath('//*[@id="yDmH0d"]/c-wiz/div/div[2]/main/div[1]/c-wiz/div/c-wiz[1]/c-wiz/div/div[2]/c-wiz/a').text

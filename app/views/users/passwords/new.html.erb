@@ -1,10 +1,20 @@
-<h2>Forgot your password?</h2>
 
+<div class="card border-dark mb-3" style="">
+<div class="card-header">
+<h2>Forgot your password?</h2>
+</div>
+<div class="card-body">
+<h4 class="card-title">
 <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <div class="col-md-8">
+    <div class="form-group">
+      <i class="fa fa-key"></i> 
+      <%= f.input :email, autocomplete: "off", required: true, autofocus: true, label: false, placeholder: "We need your current password to confirm your changes", class: "form-control custom-input", input_html: { style: "border-radius: 30px;"}  %>
+    </div>
+  </div>
   </div>
 
   <div class="form-actions">
@@ -12,4 +22,9 @@
   </div>
 <% end %>
 
+</h4>
+<p class="card-text">
 <%= render "users/shared/links" %>
+</p>
+</div>
+</div>

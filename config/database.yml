@@ -9,12 +9,12 @@ default: &default
 
 development:
   <<: *default
-  database: fr8track_development
+  database: news_development
 
 test:
   <<: *default
-  database: fr8track_test
+  database: news_test
 
 production:
   <<: *default
-  database: fr8track_production
+  database: news_production

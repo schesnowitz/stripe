@@ -1,9 +1,11 @@
 class EntertainmentsController < ApplicationController
   before_action :set_entertainment, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /entertainment
   # GET /entertainment.json
   def index
+    user_subscribed
     @entertainments = Entertainment.search(params[:term]).order(created_at: :desc)
     if @entertainments.class == Array
     # @entertainment = Kaminari.paginate_array(@entertainment).page(params[:page])

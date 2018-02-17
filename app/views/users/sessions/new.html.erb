@@ -1,15 +1,33 @@
-<h2>Log in</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+<div class="card border-dark mb-3" style="">
+<div class="card-header">
+  <h2>Log In</h2>
+</div>
+<div class="card-body">
+  <h4 class="card-title">
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <div class="col-md-8">
+        <div class="form-group">
+          <i class="fa fa-envelope"></i> 
+          <%= f.input :email, required: true, autofocus: true, label: false, class: "form-control custom-input", input_html: { style: "border-radius: 30px;"}  %>
+        </div>
+      </div>
+      <div class="form-inputs">
+        <div class="col-md-8">
+          <div class="form-group">
+            <i class="fa fa-key"></i>  
+            <%= f.input :password, required: false, label: false,  placeholder: ("Password (#{@minimum_password_length} characters minimum)" if @minimum_password_length), class: "form-control custom-input", input_html: { style: "border-radius: 30px;"}  %>
+          </div>
+        </div>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, "Log in" %>
+      </div>
+      <% end %>
+  </h4>
+  <p class="card-text">
+  <%= render "users/shared/links" %>
+  </p>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

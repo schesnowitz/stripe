@@ -1,7 +1,23 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
 <% if current_user&.subscribed? %>
-  SUBSCRIBED - <%= current_user.stripe_subscription_id %>
+<div class="jumbotron">
+  <h1 class="display-3"><%= current_user.email %></h1>
+  <p class="lead">  Your news subscription code: <%= current_user.stripe_subscription_id %></p>
+  <hr class="my-4">
+  <p>
+    You can now track Technology and Entertainment news 12/7!
+  </p>
+  <p class="lead">
+  </p>
+</div>
 <% else %>
-  <p><%= link_to "Subscribe Now!", new_subscription_path, class: 'btn btn-primary' %></p>
+<div class="jumbotron">
+  <h1 class="display-3">Welcome to Newsville</h1>
+  <p class="lead">Your ultimate news source!</p>
+  <hr class="my-4">
+  <p>A great way to keep your application updated with fresh, relevant content.</p>
+  <p class="lead">
+  <p><%= link_to "Subscribe Now and gain access to Technology and Entertainment News!", new_subscription_path, class: 'btn btn-outline-primary btn-lg btn-block' %></p>
+  </p>
+</div>
 <% end %>
+

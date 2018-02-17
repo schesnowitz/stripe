@@ -1,9 +1,11 @@
 class TecsController < ApplicationController
   before_action :set_tec, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /tec
   # GET /tec.json
   def index
+    user_subscribed
     @tecs = Tec.search(params[:term]).order(created_at: :desc)
     if @tecs.class == Array
     # @tec = Kaminari.paginate_array(@tec).page(params[:page])

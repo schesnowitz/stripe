@@ -1,27 +1,48 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
+<div class="card border-dark mb-3" style="">
+<div class="card-header">
+  <h2>Edit <%= resource_name.to_s.humanize %> Account: <%= current_user.email %></h2>
+</div>
+<div class="card-body">
+<h4 class="card-title">
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
-
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+<%= f.error_notification %>
+<div class="form-inputs">
+  <div class="col-md-8">
+    <div class="form-group">
+      <i class="fa fa-envelope"></i> 
+      <%= f.input :email, required: true, autofocus: true, label: false, class: "form-control custom-input", input_html: { style: "border-radius: 30px;"}  %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+  <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+  <% end %>
+  <div class="col-md-8">
+    <div class="form-group">
+      <i class="fa fa-key"></i> 
+      <%= f.input :password_confirmation, autocomplete: "off", required: false, autofocus: false, label: false, placeholder: "We need your current password to confirm your changes", class: "form-control custom-input", input_html: { style: "border-radius: 30px;"}  %>
+    </div>
   </div>
+  <div class="col-md-8">
+    <div class="form-group">
+      <i class="fa fa-unlock"></i> 
+      <%= f.input :password, autocomplete: "off", required: true, autofocus: false, label: false, placeholder: " New Password(leave it blank if you don't want to change it)", class: "form-control custom-input", input_html: { style: "border-radius: 30px;"}  %>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="form-group">
+      <i class="fa fa-unlock-alt"></i> 
+      <%= f.input :password_confirmation, autocomplete: "off", required: false, autofocus: false, label: false, placeholder: " New Password Confirmation (leave it blank if you don't want to change it)", class: "form-control custom-input", input_html: { style: "border-radius: 30px;"}  %>
+    </div>
+  </div>
+</div>
+<div class="form-actions">
+  <%= f.button :submit, "Update" %>
+</div>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<p><%= button_to "Cancel my account", subscription_path, data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<% if current_user.subscribed? %>
+<h3>Cancel my subscription</h3>
+<p><%= button_to "Cancel my subscription", subscription_path, class: 'btn btn-outline-danger', data: { confirm: "Are you sure?" }, method: :delete %></p>
+<% else %>
+<br>
+<p><%= link_to "Get The News for only $12.99 a month! SUBSCRIBE NOW.", new_subscription_path, class: 'btn btn-success btn-lg btn-block' %></p>
+<% end %>
