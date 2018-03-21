@@ -13,6 +13,11 @@ class WorldsController < ApplicationController
     # @world = World.order(created_at: :desc).page params[:page]
     @worlds = Kaminari.paginate_array(@worlds).page(params[:page]).per(12) 
     end
+
+
+    Pusher.trigger('my-channel', 'my-event', {
+      message: 'hello world'
+    })
   end
 
   # GET /world/1

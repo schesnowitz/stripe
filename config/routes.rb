@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :comments
   resources :app_settings
   resources :entertainments
   resources :worlds
