@@ -18,11 +18,13 @@
   <% @worlds.each do |world| %>
   <div class='col-sm-3'>
     <div class="card mb-3">
-      <%= link_to world.title_url, target: :_blank do %>
-      <h3 class="card-header"><%= truncate(world.title, length: 60) %></h3>
+      
+      <h3 class="card-header"><%= truncate(world.title, length: 60) %></h3> 
       <div class="card-body">
         <h5 class="card-title"><%= (world.source) %></h5>
+        <%= link_to 'Show Story', world_path(world) %>
       </div>
+      <%= link_to world.title_url, target: :_blank do %>
       <% end %>
       <%= image_tag (world.image_url if !world.image_url.nil? ) %>
       <div class="card-footer text-muted">

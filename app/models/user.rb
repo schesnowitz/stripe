@@ -13,4 +13,6 @@ class User < ApplicationRecord
   def subscribed?
     stripe_subscription_id?
   end
+
+  has_many :comments
 end

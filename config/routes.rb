@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :comments
+  
   resources :app_settings
   resources :entertainments
-  resources :worlds
+  resources :worlds do 
+    resources :comments
+  end
   resources :tecs
   resources :googles
   devise_for :users

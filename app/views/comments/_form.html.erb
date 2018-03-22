@@ -1,9 +1,10 @@
-<%= simple_form_for(@comment) do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for [@world, @comment], remote: true do |f| %>
+
 
   <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :comment %>
+
+    <%= f.input :comment %> 
+
   </div>
 
   <div class="form-actions">

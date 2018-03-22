@@ -4,21 +4,7 @@
     <title><%= @app_setting.tab_name %></title>
     <%= csrf_meta_tags %>
     <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-    <script>
-  
-      // Enable pusher logging - don't include this in production
-      Pusher.logToConsole = true;
-  
-      var pusher = new Pusher('3b8fe903171ecd2c3a5e', {
-        cluster: 'us2',
-        encrypted: true
-      });
-  
-      var channel = pusher.subscribe('my-channel');
-      channel.bind('my-event', function(data) {
-        alert(data.message);
-      });
-    </script>
+   
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'theme.css', media: 'all', 'data-turbolinks-track': 'reload' %>  
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>

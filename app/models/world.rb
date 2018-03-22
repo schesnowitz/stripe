@@ -1,5 +1,6 @@
 class World < ApplicationRecord
   validates_uniqueness_of :title, case_sensitive: false
+  has_many :comments
   # paginates_per 2
   def self.search(term)
     if term

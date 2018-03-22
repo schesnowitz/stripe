@@ -23,7 +23,10 @@ class WorldsController < ApplicationController
   # GET /world/1
   # GET /world/1.json
   def show
-    is_admin?
+    # is_admin?
+    @comment = Comment.new 
+    @comments = @world.comments 
+    # @user = current_user
   end
 
   # GET /world/new

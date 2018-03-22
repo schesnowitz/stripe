@@ -1,2 +1,4 @@
 class Comment < ApplicationRecord
-end
+  belongs_to :world 
+  belongs_to :user 
+end 

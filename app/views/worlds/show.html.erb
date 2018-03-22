@@ -1,24 +1,59 @@
-<p id="notice"><%= notice %></p>
+<div data-turbolinks="false">
+<div class='row'>
+  <div class='col-sm-3'>
+    <div class="card mb-3">
+      
+      <h3 class="card-header"><%= truncate(@world.title, length: 60) %></h3> 
+      <div class="card-body">
+        <h5 class="card-title"><%= (@world.source) %></h5>
 
-<p>
-  <strong>Title:</strong>
-  <%= @world.title %>
-</p>
+      </div>
+      <%= link_to @world.title_url, target: :_blank do %>
+      <% end %>
+      <%= image_tag (@world.image_url if !@world.image_url.nil? ) %>
+      <div class="card-footer text-muted">
+        Story Published <%= time_ago_in_words(@world.created_at) %> ago
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Source:</strong>
-  <%= @world.source %>
-</p>
 
-<p>
-  <strong>Title url:</strong>
-  <%= @world.title_url %>
-</p>
 
-<p>
-  <strong>Image url:</strong>
-  <%= @world.image_url %>
-</p>
 
-<%= link_to 'Edit', edit_world_path(@world) %> |
-<%= link_to 'Back', worlds_path %>
+<p id='the-message'></p>   
+
+<%= render 'comments/form' %>
+
+
+
+<% @comments.each do |comment| %>
+
+<div class="card border-primary mb-3">
+  <div class="card-header"><%= comment.user.email %></div>
+  <div class="card-body">
+    <h4 class="card-title"></h4>
+    <p class="card-text"><%= comment.comment %></p>
+  </div>
+</div>
+ 
+<% end %>
+
+<script>
+  
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('3b8fe903171ecd2c3a5e', {
+    cluster: 'us2',
+    encrypted: true
+  });
+
+  var channel = pusher.subscribe('my-channel');
+  channel.bind('my-event', function(data) {
+    $("#the-message").append( '<p>' + data.user_email + ': ' +  data.comment + '</p>'); 
+    // $("#user_email").append(); 
+    $('#comment_comment').val('');   
+  });
+</script>
+</div>
