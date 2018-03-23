@@ -3,9 +3,19 @@ Rails.application.routes.draw do
   
   resources :app_settings
   resources :entertainments
+
+
   resources :worlds do 
     resources :comments
   end
+
+  resources :comments do
+    member do
+      put "like", to: "comments#vote"
+      # put "downvote", to: "comments#downvote" 
+    end
+  end
+  
   resources :tecs
   resources :googles
   devise_for :users

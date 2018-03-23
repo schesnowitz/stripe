@@ -1,6 +1,9 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :vote]
   before_action :authenticate_user!
+
+  respond_to :js
+
   # GET /comments
   # GET /comments.json
   def index
@@ -67,6 +70,25 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def vote
+
+    if !current_user.liked? @comment
+      @comment.liked_by current_user
+    elsif current_user.liked? @comment
+      @comment.unliked_by current_user
+    end
+      # @comment.vote_by current_user
+      # # redirect_back(fallback_location: root_path) 
+      # Pusher.trigger('my-channel2', 'my-event2', {
+      #   up_vote: @comment.get_upvotes.size 
+      # })
+
+      # puts "Voted: #{@comment.get_upvotes.size}" 
+
+  end 
+  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
