@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @comments = Comment.all
+    @comment = Comment.new
   end
 
   # GET /comments/1
@@ -17,35 +18,32 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @world = World.find(params[:world_id])
-    @comment = @world.comments.build
+    # @world = World.find(params[:world_id])
+    @comment = Comment.new
     # @comment.user = current_user
 
   end
 
   # GET /comments/1/edit
   def edit
-    @comment.user = current_user
-    @world = World.find(params[:world_id])
+    # @comment.user = current_user
+    # @world = World.find(params[:world_id])
   end
 
   # POST /comments
   # POST /comments.json
   def create
-    @world = World.find(params[:world_id]) 
-    @comment = @world.comments.build(comment_params) 
+    # @world = World.find(params[:world_id]) 
+    @comment = Comment.new(comment_params) 
     @comment.user = current_user
-    respond_to do |format|
       if @comment.save
         Pusher.trigger('my-channel', 'my-event', {
-          # text: @messages.each { |message| message.text }
           comment: @comment.comment, 
           user_email: @comment.user.email
         })
-        format.json
       end
     end
-  end
+
 
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
@@ -94,10 +92,11 @@ class CommentsController < ApplicationController
     # redirect_back(fallback_location: root_path)
     Pusher.trigger('my-channel2', 'my-event2', {
       up_vote: @comment.get_likes.size, 
-      down_vote: @comment.get_downvotes.size    
+      down_vote: @comment.get_downvotes.size,
+      id: @comment.id    
     })
     puts "up #{@comment.get_upvotes.size}"
-    # puts "Down #{@comment.get_downvotes.size}"
+    puts "ID #{@comment.id}"
   end
 
   def downvote

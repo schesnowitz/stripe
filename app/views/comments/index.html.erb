@@ -6,7 +6,10 @@
   <thead>
     <tr>
       <th>User</th>
+      <th>User Email</th>
       <th>Comment</th>
+      <th>Like</th>
+      <th>Unlike</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,10 +18,20 @@
     <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.user_id %></td>
+        <td><%= comment.user.email %></td>
         <td><%= comment.comment %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <%= link_to upvote_comment_path(comment), class: '',  remote: true, method: :put do %>
+        <p id=''><i class='fa fa-thumbs-up fa-1x'></i> <span class='likes-count'><%= comment.get_likes.size %></span></p> 
+        <% end %>
+        </td>   
+        <td>
+        <%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
+        <p id=''><i class='fa fa-thumbs-down fa-1x'></i><span> </span></p>  
+        <% end %>
+        </td>
+
+
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +39,24 @@
 
 <br>
 
-<%= link_to 'New Comment', new_comment_path %>
+<%= render 'form', comment: @comment %>
+<script> 
+  
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('3b8fe903171ecd2c3a5e', {
+    cluster: 'us2',
+    encrypted: true
+  });  
+ 
+ 
+  var channel = pusher.subscribe('my-channel2');
+  channel.bind('my-event2', function(data) {   
+
+    $(".likes-count").html( data.up_vote );    
+    $(".pusher_downvote").html( data.down_vote );     
+  });
+
+
+</script> 
