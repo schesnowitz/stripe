@@ -14,27 +14,10 @@
  
  
   var channel = pusher.subscribe('my-channel2');
-  channel.bind('my-event2', function(data) {  
-    $("#pusher_upvote").html( data.up_vote );   
-  });
+  channel.bind('my-event2', function(data) {   
 
-
-</script> 
-
-<script> 
-  
-  // Enable pusher logging - don't include this in production
-  Pusher.logToConsole = true;
-
-  var pusher = new Pusher('3b8fe903171ecd2c3a5e', {
-    cluster: 'us2',
-    encrypted: true
-  });  
-
- 
-  var channel = pusher.subscribe('my-channel3');
-  channel.bind('my-event3', function(data) {  
-    $("#pusher_downvote").append( '<p>' + data.down_vote + '</p>' );   
+    $(".likes-count").html( data.up_vote );    
+    $(".pusher_downvote").html( data.down_vote );     
   });
 
 

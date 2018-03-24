@@ -25,46 +25,37 @@
 
 <%= render 'comments/form' %>
 
-<%= render @world.comments %> 
+
 
 
 <% @world.comments.each do |comment| %> 
 
  
-<div data-turbolinks="false">
+
 <div class="card border-primary mb-3">
   <div class="card-header"><%= comment.user.email %>
   
 
   </div>
   <div class="card-body">
-    <h4 class="card-title"></h4>
+    <h4 class="card-title">
+    
+<%= link_to upvote_comment_path(comment), class: '',  remote: true, method: :put do %>
+ <p id=''><i class='fa fa-thumbs-up fa-1x'></i> <span class='likes-count'><%= comment.get_likes.size %> </span></p> 
+
+<% end %>
+
+
+<%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
+ <p id=''><i class='fa fa-thumbs-down fa-1x'></i> <span class=''> </span></p>  
+<% end %>
+</h4>
     <p class="card-text"><%= comment.comment %></p>
   </div>
 </div>
 
 
-
-
-<%= link_to upvote_comment_path(comment), class: '',  remote: true, method: :put do %>
- <p> <i class='fa fa-thumbs-up fa-1x'></i> <span span id='pusher_upvote'><%= comment.get_upvotes.size %> </span> </p> 
-<% end %>
-
-<%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
- <p> <i class='fa fa-thumbs-down fa-1x'></i> <span id='pusher_downvote'><%= comment.get_downvotes.size %>  </span></p>
-<% end %>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
+  <% end %>
 
 
 
@@ -90,5 +81,9 @@
 
 </script>
 
-
+<%= render @world.comments %> 
 </div>
+</div>
+
+
+
