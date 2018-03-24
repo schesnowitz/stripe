@@ -25,52 +25,49 @@
 
 <%= render 'comments/form' %>
 
+<%= render @world.comments %> 
 
 
-<% @comments.each do |comment| %>
+<% @world.comments.each do |comment| %> 
 
+ 
+<div data-turbolinks="false">
 <div class="card border-primary mb-3">
-  <div class="card-header"><%= comment.user.email %></div>
+  <div class="card-header"><%= comment.user.email %>
+  
+
+  </div>
   <div class="card-body">
     <h4 class="card-title"></h4>
     <p class="card-text"><%= comment.comment %></p>
   </div>
 </div>
-<p>
-<%= link_to like_comment_path(comment), class: 'like-btn',  remote: true, method: :put do %>
-<div>
-<span> <p> <i class='fa fa-thumbs-up fa-3x'></i> </p> </span>
-</div>
+
+
+
+
+<%= link_to upvote_comment_path(comment), class: '',  remote: true, method: :put do %>
+ <p> <i class='fa fa-thumbs-up fa-1x'></i> <span span id='pusher_upvote'><%= comment.get_upvotes.size %> </span> </p> 
 <% end %>
-<span class='likes-count'><%= comment.get_upvotes.size %></span>
 
-
-
-</p>
-<p>From Data <%= comment.get_upvotes.size %></p>
-
+<%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
+ <p> <i class='fa fa-thumbs-down fa-1x'></i> <span id='pusher_downvote'><%= comment.get_downvotes.size %>  </span></p>
 <% end %>
-<script>
-  
-  // Enable pusher logging - don't include this in production
-  Pusher.logToConsole = true;
-
-  var pusher = new Pusher('3b8fe903171ecd2c3a5e', {
-    cluster: 'us2',
-    encrypted: true
-  });
-
-  var channel = pusher.subscribe('my-channel2');
-  channel.bind('my-event2', function(data) { 
- 
-    $("#up_vote").html( data.up_vote );    
-
-    $("#down_vote").html(data.down_vote) ;    
-
-  });
+<% end %>
 
 
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
   

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!
 
   respond_to :js
@@ -71,24 +71,40 @@ class CommentsController < ApplicationController
     end
   end
 
-  def vote
+  # def vote
 
-    if !current_user.liked? @comment
-      @comment.liked_by current_user
-    elsif current_user.liked? @comment
-      @comment.unliked_by current_user
-    end
-      # @comment.vote_by current_user
-      # # redirect_back(fallback_location: root_path) 
-      # Pusher.trigger('my-channel2', 'my-event2', {
-      #   up_vote: @comment.get_upvotes.size 
-      # })
-
-      # puts "Voted: #{@comment.get_upvotes.size}" 
-
-  end 
+  #   if !current_user.liked? @comment
+  #     @comment.liked_by current_user
+  #   elsif current_user.liked? @comment
+  #     @comment.unliked_by current_user
+  #   end
+  #     # @comment.vote_by current_user
+  #     # # redirect_back(fallback_location: root_path) 
+  #     Pusher.trigger('my-channel2', 'my-event2', {
+  #       pusher_like: @comment.votes_for.size  
+  #     })
+  #     @comment_size = @comment.votes_for.size 
+       
+  #   puts "Size #{@comment_size}"
+  # end 
   
+  def upvote
+    @comment.upvote_from current_user
+    # redirect_back(fallback_location: root_path)
+    Pusher.trigger('my-channel2', 'my-event2', {
+      up_vote: @comment.get_upvotes.size    
+    })
+    puts "up #{@comment.get_upvotes.size}"
+  end
 
+  def downvote
+    @comment.downvote_from current_user
+    # redirect_back(fallback_location: root_path)
+    Pusher.trigger('my-channel3', 'my-event3', {
+      down_vote: @comment.get_downvotes.size    
+    })
+    puts "Down #{@comment.get_downvotes.size}"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

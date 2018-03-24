@@ -25,8 +25,6 @@ class WorldsController < ApplicationController
   def show
     # is_admin?
     @comment = Comment.new 
-    @comments = @world.comments 
-    # @user = current_user
   end
 
   # GET /world/new

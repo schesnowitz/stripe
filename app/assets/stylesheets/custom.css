@@ -10,3 +10,8 @@
   position: relative;
   padding-left: 45px !important;
   }
+
+
+  .hidden {
+    display: none;
+}

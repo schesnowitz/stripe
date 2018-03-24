@@ -9,13 +9,13 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :comments do
-    member do
-      put "like", to: "comments#vote"
-      # put "downvote", to: "comments#downvote" 
+    resources :comments do
+      member do
+        put "upvote", to: "comments#upvote"
+      put "downvote", to: "comments#downvote" 
     end
   end
-  
+
   resources :tecs
   resources :googles
   devise_for :users
