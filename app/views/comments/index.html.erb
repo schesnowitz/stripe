@@ -22,12 +22,13 @@
         <td><%= comment.comment %></td>
         <td>
         <%= link_to upvote_comment_path(comment), class: '',  remote: true, method: :put do %>
-        <p id=''><i class='fa fa-thumbs-up fa-1x'></i> <span class='likes-count'><%= comment.get_likes.size %></span></p> 
+        Upvote
+        <span class='likes-count'><%= comment.get_likes.size %></span> 
         <% end %>
         </td>   
         <td>
         <%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
-        <p id=''><i class='fa fa-thumbs-down fa-1x'></i><span> </span></p>  
+        Down Vote
         <% end %>
         </td>
 
