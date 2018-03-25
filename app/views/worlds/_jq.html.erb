@@ -1,0 +1,15 @@
+<script>
+  
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+  var pusher = new Pusher('3b8fe903171ecd2c3a5e', {
+    cluster: 'us2',
+    encrypted: true
+  });
+  var channel = pusher.subscribe('my-channel');
+  channel.bind('my-event', function(data) {
+    $("#the-message").append( '<p>' + data.user_email + ': ' +  data.comment + '</p>'); 
+    // $("#user_email").append(); 
+    $('#comment_comment').val('');   
+  });
+</script>

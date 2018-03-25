@@ -2,11 +2,9 @@
 <div class='row'>
   <div class='col-sm-3'>
     <div class="card mb-3">
-      
-      <h3 class="card-header"><%= truncate(@world.title, length: 60) %></h3> 
+      <h3 class="card-header"><%= truncate(@world.title, length: 60) %></h3>
       <div class="card-body">
         <h5 class="card-title"><%= (@world.source) %></h5>
-
       </div>
       <%= link_to @world.title_url, target: :_blank do %>
       <% end %>
@@ -17,76 +15,34 @@
     </div>
   </div>
 </div>
-
-
-
-
-<p id='the-message'></p>   
-
+<p id='the-message'></p>
 <%= render 'comments/form' %>
-
-
-
-
 <% @world.comments.each do |comment| %> 
-
- 
-
 <div class="card border-primary mb-3">
   <div class="card-header"><%= comment.user.email %>
-  
-
   </div>
-
-
-<%= link_to upvote_comment_path(comment), class: '',  remote: true, method: :put do %>
- <p id=''><i class='fa fa-thumbs-up fa-1x'></i> </p> 
-
+  <div class="card-body">
+    <h4 class="card-title"></h4>
+    <p class="card-text"><%= comment.comment %></p>
+  </div>
+</div>
+<%= link_to upvote_comment_path(comment), class: 'like-btn',  remote: true, method: :put do %>
+<p id=''><i class='fa fa-thumbs-up fa-1x'></i> </p>
 <span class='likes-count dynamic-<%= comment.id %>'><%= comment.get_likes.size %> </span>
-
 <% end %>
-
-
-
 <%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
- <p id=''><i class='fa fa-thumbs-down fa-1x'></i> </p>  
+<p id=''><i class='fa fa-thumbs-down fa-1x'></i> </p>
 <span class='likes-count dynamic-down-<%= comment.id %>'><%= comment.get_likes.size %> </span>
 <% end %>
 </h4>
-  
+<% end %>
 
 
-
-  <% end %>
-
-
-
-
-<script>
-  
-  // Enable pusher logging - don't include this in production
-  Pusher.logToConsole = true;
-
-  var pusher = new Pusher('3b8fe903171ecd2c3a5e', {
-    cluster: 'us2',
-    encrypted: true
-  });
-
-  var channel = pusher.subscribe('my-channel');
-  channel.bind('my-event', function(data) {
-    $("#the-message").append( '<p>' + data.user_email + ': ' +  data.comment + '</p>'); 
-
-    // $("#user_email").append(); 
-    $('#comment_comment').val('');   
-  });
-
-
-</script>
 
 <%= render @world.comments %> 
+<%= render 'jq' %>  
 </div>
 </div>
 
 
 
-<div class='test'>asdf</div>
