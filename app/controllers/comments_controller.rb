@@ -93,8 +93,8 @@ class CommentsController < ApplicationController
     @comment.upvote_from current_user
     # redirect_back(fallback_location: root_path)
     Pusher.trigger('my-channel2', 'my-event2', {
-      up_vote: @comment.get_likes.size, 
-      down_vote: @comment.get_downvotes.size,
+      up_vote: @comment.get_upvotes.size, 
+      # down_vote: @comment.get_downvotes.size,
       comment_id: @comment.id    
     })
     puts "up #{@comment.get_upvotes.size}"
@@ -105,9 +105,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.downvote_from current_user
     # redirect_back(fallback_location: root_path)
-    Pusher.trigger('my-channel2', 'my-event2', {
-      up_vote: @comment.get_upvotes.size, 
-      down_vote: @comment.get_downvotes.size    
+    Pusher.trigger('my-channel2', 'my-event3', {
+      # up_vote: @comment.get_upvotes.size, 
+      down_vote: @comment.get_downvotes.size,
+      comment_id: @comment.id     
     })
     puts "up #{@comment.get_upvotes.size}"
     puts "Down #{@comment.get_downvotes.size}"

@@ -38,25 +38,23 @@
 
   </div>
 
-    <div id="background">
-<div id="selected" class=''><%= comment.id %></div> 
-</div>
+
 <%= link_to upvote_comment_path(comment), class: '',  remote: true, method: :put do %>
- <p id=''><i class='fa fa-thumbs-up fa-1x'></i> <span class='likes-count'><%= comment.get_likes.size %> </span></p> 
+ <p id=''><i class='fa fa-thumbs-up fa-1x'></i> </p> 
 
-
+<span class='likes-count dynamic-<%= comment.id %>'><%= comment.get_likes.size %> </span>
 
 <% end %>
 
 
 
 <%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
- <p id=''><i class='fa fa-thumbs-down fa-1x'></i> <span class=''> </span></p>  
+ <p id=''><i class='fa fa-thumbs-down fa-1x'></i> </p>  
+<span class='likes-count dynamic-down-<%= comment.id %>'><%= comment.get_likes.size %> </span>
 <% end %>
 </h4>
-    <p class="card-text"><%= comment.comment %></p>
-  </div>
-</div>
+  
+
 
 
   <% end %>
