@@ -37,13 +37,17 @@
   
 
   </div>
-  <div class="card-body">
-    <h4 class="card-title">
-    
+
+    <div id="background">
+<div id="selected" class=''><%= comment.id %></div> 
+</div>
 <%= link_to upvote_comment_path(comment), class: '',  remote: true, method: :put do %>
  <p id=''><i class='fa fa-thumbs-up fa-1x'></i> <span class='likes-count'><%= comment.get_likes.size %> </span></p> 
 
+
+
 <% end %>
+
 
 
 <%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
@@ -87,3 +91,4 @@
 
 
 
+<div class='test'>asdf</div>

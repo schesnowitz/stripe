@@ -16,9 +16,24 @@
   var channel = pusher.subscribe('my-channel2');
   channel.bind('my-event2', function(data) {   
 
-    $(".likes-count").html( data.up_vote );    
+    $(".likes-count").html( data.up_vote );  
+    $(".comment_id").html( data.comment_id ); 
     $(".pusher_downvote").html( data.down_vote );     
+
   });
 
 
 </script> 
+
+
+
+
+<script>
+var text = $( "div" ).children( "#selected" ).val;
+if (text == 4) { 
+    document.getElementById("background").style.backgroundColor="red";
+
+} 
+
+       
+</script>

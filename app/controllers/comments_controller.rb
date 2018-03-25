@@ -94,10 +94,11 @@ class CommentsController < ApplicationController
     # redirect_back(fallback_location: root_path)
     Pusher.trigger('my-channel2', 'my-event2', {
       up_vote: @comment.get_likes.size, 
-      down_vote: @comment.get_downvotes.size    
+      down_vote: @comment.get_downvotes.size,
+      comment_id: @comment.id    
     })
     puts "up #{@comment.get_upvotes.size}"
-    # puts "Down #{@comment.get_downvotes.size}"
+    puts "ID #{@comment.id}"
   end
 
   def downvote
