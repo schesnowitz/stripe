@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :like, :unlike]
   before_action :authenticate_user!
 
   respond_to :js
@@ -78,40 +78,43 @@ class CommentsController < ApplicationController
   #   elsif current_user.liked? @comment
   #     @comment.unliked_by current_user
   #   end
-  #     # @comment.vote_by current_user
+
   #     # # redirect_back(fallback_location: root_path) 
   #     Pusher.trigger('my-channel2', 'my-event2', {
-  #       pusher_like: @comment.votes_for.size  
+  #       likes: @comment.get_likes.size, 
+  #       comment_id: @comment.id   
   #     })
-  #     @comment_size = @comment.votes_for.size 
-       
-  #   puts "Size #{@comment_size}"
+  #     puts "Votes For: #{@comment.votes_for.size}"
   # end 
   
-  def upvote
-    @comment = Comment.find(params[:id])
-    @comment.upvote_from current_user
-    # redirect_back(fallback_location: root_path)
+  def like
+
+    @comment.liked_by current_user
+
+
+    # # redirect_back(fallback_location: root_path) 
     Pusher.trigger('my-channel2', 'my-event2', {
-      up_vote: @comment.get_upvotes.size, 
-      down_vote: @comment.get_downvotes.size,
-      comment_id: @comment.id    
+      likes: @comment.get_likes.size, 
+      dislikes: @comment.get_dislikes.size,
+      comment_id: @comment.id   
     })
-    puts "up #{@comment.get_upvotes.size}"
-    puts "Down #{@comment.get_downvotes.size}"
+    puts "Likes: #{@comment.get_likes.size}"
+    puts "DisLikes: #{@comment.get_dislikes.size}"
   end
 
-  def downvote
-    @comment = Comment.find(params[:id])
-    @comment.downvote_from current_user
-    # redirect_back(fallback_location: root_path)
-    Pusher.trigger('my-channel3', 'my-event3', {
-      up_vote: @comment.get_upvotes.size, 
-      down_vote: @comment.get_downvotes.size,
-      comment_id: @comment.id     
+  def unlike
+
+    @comment.disliked_by current_user
+
+
+    # # redirect_back(fallback_location: root_path) 
+    Pusher.trigger('my-channel2', 'my-event2', {
+      likes: @comment.get_likes.size, 
+      dislikes: @comment.get_dislikes.size,
+      comment_id: @comment.id   
     })
-    puts "up #{@comment.get_upvotes.size}"
-    puts "Down #{@comment.get_downvotes.size}"
+      puts "Likes: #{@comment.get_likes.size}"
+      puts "DisLikes: #{@comment.get_dislikes.size}"
   end
 
   private

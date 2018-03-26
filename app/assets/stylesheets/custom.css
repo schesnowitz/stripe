@@ -15,3 +15,12 @@
   .hidden {
     display: none;
 }
+
+
+.red {
+  color: rgb(255, 0, 0);
+}
+
+.green {
+  color:rgb(0, 253, 63);
+}

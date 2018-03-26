@@ -8,8 +8,18 @@
   });
   var channel = pusher.subscribe('my-channel');
   channel.bind('my-event', function(data) {
-    $("#the-message").append( '<p>' + data.user_email + ': ' +  data.comment + '</p>'); 
-    // $("#user_email").append(); 
+    //$("#the-message").append( '<p>' + data.user_email + ': ' +  data.comment + '</p>'); 
+
+    $("#the-message").append( 
+      
+'<div class="card border-primary mb-3">' +
+'<div class="card-header">' + data.user_email + '</div>' + 
+'<div class="card-body">' + '<h4 class="card-title">' + '</h4>' +
+'<p class="card-text">' + data.comment + '</p>' + '</div>' + '</div>' +
+
+);
+
+
     $('#comment_comment').val('');   
   });
 </script>

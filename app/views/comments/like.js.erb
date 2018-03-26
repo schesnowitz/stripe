@@ -1,0 +1,18 @@
+// Enable pusher logging - don't include this in production
+   Pusher.logToConsole = true;
+
+  var pusher = new Pusher('3b8fe903171ecd2c3a5e', {
+    cluster: 'us2',
+    encrypted: true
+  });  
+ 
+
+  var channel = pusher.subscribe('my-channel2');
+  channel.bind('my-event2', function(data) {   
+
+    $(".dynamic-likes" + data.comment_id).html( data.likes ); 
+        $(".dynamic-dislikes" + data.comment_id).html( data.dislikes );   
+
+
+ console.warn(data.dislikes); 
+  });

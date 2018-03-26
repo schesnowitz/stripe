@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
     resources :comments do
       member do
-        put "upvote", to: "comments#upvote"
-      put "downvote", to: "comments#downvote" 
+        put "like", to: "comments#like"
+        put "unlike", to: "comments#unlike" 
     end
   end
 

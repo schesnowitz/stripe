@@ -1,22 +1,20 @@
-<div data-turbolinks="false">
-<div class='row'>
-  <div class='col-sm-3'>
-    <div class="card mb-3">
-      <h3 class="card-header"><%= truncate(@world.title, length: 60) %></h3>
-      <div class="card-body">
-        <h5 class="card-title"><%= (@world.source) %></h5>
-      </div>
-      <%= link_to @world.title_url, target: :_blank do %>
-      <% end %>
-      <%= image_tag (@world.image_url if !@world.image_url.nil? ) %>
-      <div class="card-footer text-muted">
-        Story Published <%= time_ago_in_words(@world.created_at) %> ago
-      </div>
-    </div>
+<div class="jumbotron">
+  <%= link_to @world.title_url, target: :_blank do %>
+  <h1 class="display-4"><%= truncate(@world.title, length: 120) %></h1>
+  <p class="lead"><%= (@world.source) %></p>
+  <hr class="my-4">
+  <p>      
+    <%= image_tag (@world.image_url if !@world.image_url.nil? ) %>
+  <div class="card-footer text-muted">
+    <% end %>
+    Story Published <%= time_ago_in_words(@world.created_at) %> ago
   </div>
+  </p>
+  <p class="lead">
+  </p>
 </div>
-<p id='the-message'></p>
 <%= render 'comments/form' %>
+<p id='the-message'></p>
 <% @world.comments.each do |comment| %> 
 <div class="card border-primary mb-3">
   <div class="card-header"><%= comment.user.email %>
@@ -26,23 +24,25 @@
     <p class="card-text"><%= comment.comment %></p>
   </div>
 </div>
-<%= link_to upvote_comment_path(comment), class: 'like-btn',  remote: true, method: :put do %>
-<p id=''><i class='fa fa-thumbs-up fa-1x'></i> </p>
-<span class='likes-count dynamic-<%= comment.id %>'><%= comment.get_likes.size %> </span>
+<%= link_to like_comment_path(comment), class: 'like-btn',  remote: true, method: :put do %>
+<span class='green'>
+  <p id='dynamic-heart-<%= comment.id %>' class='heart'>
+    <i class='fa fa-arrow-up fa-1x'></i> 
+    <span class='dynamic-likes<%= comment.id %>'> <%= comment.get_likes.size %></span>
+  </p>
+</span>
 <% end %>
-<%= link_to downvote_comment_path(comment), class: '',  remote: true, method: :put do %>
-<p id=''><i class='fa fa-thumbs-down fa-1x'></i> </p>
-<span class='likes-count dynamic-down-<%= comment.id %>'><%= comment.get_likes.size %> </span>
+<%= link_to unlike_comment_path(comment), class: 'like-btn',  remote: true, method: :put do %>
+<span class='red'>
+  <p id='dynamic-heart-<%= comment.id %>' class='heart'>
+    <i class='fa fa-arrow-down fa-1x'></i> 
+    <span class='dynamic-dislikes<%= comment.id %>'> <%= comment.get_dislikes.size %></span>
+  </p>
+</span>
 <% end %>
-</h4>
 <% end %>
-
-
-
 <%= render @world.comments %> 
 <%= render 'jq' %>  
 </div>
 </div>
-
-
-
+</div>
